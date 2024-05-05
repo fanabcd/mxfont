@@ -11,9 +11,12 @@ import numpy as np
 
 def get_defined_chars(fontfile):
     ttf = TTFont(fontfile)
-    chars = [chr(y) for y in ttf["cmap"].tables[0].cmap.keys()]
-    return chars
+    chars = []
 
+    # 遍历所有表
+    for table in ttf['cmap'].tables:
+        for k in table.cmap.keys():
+            chars.append(chr(k))
 
 def get_filtered_chars(fontpath):
     ttf = read_font(fontpath)
